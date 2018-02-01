@@ -30,7 +30,7 @@ io.on('connect', function(socket) {
   var questionNum = 0; // keep count of question, used for IF condition.
   socket.on('loaded', function(){// we wait until the client has loaded and contacted us that it is ready to go.
 
-  socket.emit('answer',"Hey, Hello I am \"___*-\" a simple chat bot example."); //We start with the introduction;
+  socket.emit('answer',"Hey, Hello I am \"___*-\" a simple joke chat bot example."); //We start with the introduction;
   setTimeout(timedQuestion, 2500, socket, "What is your Name?"); // Wait a moment and respond with a question.
 
 });
@@ -51,46 +51,79 @@ function bot(data,socket,questionNum) {
 
 /// These are the main statments that make up the conversation.
   if (questionNum == 0) {
-    answer = 'Hello ' + input + ' :-)';// output response
+    answer = `Hello ${input} :-)`;// output response
     waitTime = 2000;
-    question = 'How old are you?';			    	// load next question
+    question = 'What type of joke do you want to hear?';			    	// load next question
   } else if (questionNum == 1) {
-    answer= 'Really ' + input + ' Years old? So that means you where born in: ' + (2018-parseInt(input));// output response
-    waitTime = 2000;
-    question = 'Where do you live?';			    	// load next question
-  } else if (questionNum == 2) {
-    answer= ' Cool! I have never been to ' + input+'.';
-    waitTime = 2000;
-    question = 'Whats your favorite Color?';			    	// load next question
-  } else if (questionNum == 3) {
-    answer= 'Ok, ' + input+' it is.';
-    socket.emit('changeBG',input.toLowerCase());
-    waitTime = 2000;
-    question = 'Can you still read the font?';			    	// load next question
-  } else if (questionNum == 4) {
-    if (input.toLowerCase()==='yes'|| input===1){
-      answer = 'Perfect!';
+    if (input.toLowerCase() === 'dirty') {
+      answer = `A horse walks out a bar and slips into some mud. Get it?`;// output response
       waitTime = 2000;
+      question = 'Want to hear another joke?';			    	// load next question
+    } else if (input.toLowerCase() === 'clean') {
+      answer = `A horse walks out a bar and slips on a bar of soap. Get it?`;// output response
+      waitTime = 2000;
+      question = 'Want to hear another joke?';
+    } else if (input.toLowerCase() === 'funny') {
+      answer = `A horse walks out a bar, slips and hits his funny bone. Get it?`;// output response
+      waitTime = 2000;
+      question = 'Want to hear another joke?';
+    } else if (input.toLowerCase() === 'dark') {
+      answer = `A horse walks out a bar at night and slips. Get it?`;// output response
+      waitTime = 2000;
+      question = 'Want to hear another joke?';
+    } else {
+      answer = `A horse walks into a bar and the bartender says why the long face. Get it?`;// output response
+      waitTime = 2000;
+      question = 'Want to hear another joke?';
+    }
+  } else if (questionNum == 2) {
+    if (input.toLowerCase() === 'yes'|| input === 1){
+      answer = 'Perfect!';
+      // waitTime = 2000;
       question = 'Whats your favorite place?';
-    } else if(input.toLowerCase()==='no'|| input===0){
+      questionNum--;
+      waitTime = 0;
+    } else if(input.toLowerCase() === 'no'|| input === 0){
         socket.emit('changeFont','white'); /// we really should look up the inverse of what we said befor.
         question = 'How about now?'
         answer = '';
         waitTime = 0;
         questionNum--; // Here we go back in the question number this can end up in a loop
     } else {
-      answer = 'I did not understand you. Can you please answer with simply with yes or no.'
-      question = '';
-      questionNum--;
+      answer = 'Some people can only take so much funny. See ya!';// output response
       waitTime = 0;
+      question = '';
     }
-  // load next question
-  }
-  else {
+  } else {
     answer = 'I have nothing more to say!';// output response
     waitTime = 0;
     question = '';
   }
+  // else if (questionNum == 3) {
+  //   answer= 'Ok, ' + input+' it is.';
+  //   socket.emit('changeBG',input.toLowerCase());
+  //   waitTime = 2000;
+  //   question = 'Can you still read the font?';			    	// load next question
+  // } else if (questionNum == 4) {
+  //   if (input.toLowerCase() === 'yes'|| input === 1){
+  //     answer = 'Perfect!';
+  //     waitTime = 2000;
+  //     question = 'Whats your favorite place?';
+  //   } else if(input.toLowerCase() === 'no'|| input === 0){
+  //       socket.emit('changeFont','white'); /// we really should look up the inverse of what we said befor.
+  //       question = 'How about now?'
+  //       answer = '';
+  //       waitTime = 0;
+  //       questionNum--; // Here we go back in the question number this can end up in a loop
+  //   } else {
+  //     answer = 'I did not understand you. Can you please answer with simply with yes or no.'
+  //     question = '';
+  //     questionNum--;
+  //     waitTime = 0;
+  //   }
+  // load next question
+  // }
+  
 
 
 // We take the changed data and distribute it across the required objects.
