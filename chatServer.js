@@ -57,23 +57,27 @@ function bot(data,socket,questionNum) {
   } else if (questionNum == 1) {
     if (input.toLowerCase() === 'dirty') {
       answer = `A horse walks out a bar and slips into some mud. Get it?`;// output response
-      waitTime = 2000;
+      waitTime = 5000;
       question = 'Want to hear another joke?';			    	// load next question
     } else if (input.toLowerCase() === 'clean') {
       answer = `A horse walks out a bar and slips on a bar of soap. Get it?`;// output response
-      waitTime = 2000;
+      waitTime = 5000;
       question = 'Want to hear another joke?';
     } else if (input.toLowerCase() === 'funny') {
       answer = `A horse walks out a bar, slips and hits his funny bone. Get it?`;// output response
-      waitTime = 2000;
+      waitTime = 5000;
       question = 'Want to hear another joke?';
     } else if (input.toLowerCase() === 'dark') {
       answer = `A horse walks out a bar at night and slips. Get it?`;// output response
-      waitTime = 2000;
+      waitTime = 5000;
+      question = 'Want to hear another joke?';
+    } else if (input.toLowerCase() === 'pun') {
+      answer = `Two colts were playing games and I said, "Quit horsin' around!". Get it?`;// output response
+      waitTime = 5000;
       question = 'Want to hear another joke?';
     } else {
       answer = `A horse walks into a bar and the bartender says why the long face. Get it?`;// output response
-      waitTime = 2000;
+      waitTime = 5000;
       question = 'Want to hear another joke?';
     }
   } else if (questionNum == 2) {
@@ -81,7 +85,7 @@ function bot(data,socket,questionNum) {
       answer = 'Perfect!';
       // waitTime = 2000;
       // question = 'Whats your favorite place?';
-      questionNum -= 2;
+      questionNum = 0;
       waitTime = 0;
     } else if(input.toLowerCase() === 'no'|| input === 0){
       answer = 'People can only take so much funny. See ya!';// output response
