@@ -80,22 +80,20 @@ function bot(data,socket,questionNum) {
     if (input.toLowerCase() === 'yes'|| input === 1){
       answer = 'Perfect!';
       // waitTime = 2000;
-      question = 'Whats your favorite place?';
+      // question = 'Whats your favorite place?';
       questionNum--;
       waitTime = 0;
     } else if(input.toLowerCase() === 'no'|| input === 0){
-        socket.emit('changeFont','white'); /// we really should look up the inverse of what we said befor.
-        question = 'How about now?'
-        answer = '';
-        waitTime = 0;
-        questionNum--; // Here we go back in the question number this can end up in a loop
+      answer = 'People can only take so much funny. See ya!';// output response
+      waitTime = 0;
+      question = '';
     } else {
-      answer = 'Some people can only take so much funny. See ya!';// output response
+      answer = 'People can only take so much funny. See ya!';// output response
       waitTime = 0;
       question = '';
     }
   } else {
-    answer = 'I have nothing more to say!';// output response
+    answer = 'People can only take so much funny. See ya!';// output response
     waitTime = 0;
     question = '';
   }
