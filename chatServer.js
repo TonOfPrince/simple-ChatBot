@@ -81,7 +81,7 @@ function bot(data,socket,questionNum) {
       answer = 'Perfect!';
       // waitTime = 2000;
       // question = 'Whats your favorite place?';
-      questionNum--;
+      questionNum -= 2;
       waitTime = 0;
     } else if(input.toLowerCase() === 'no'|| input === 0){
       answer = 'People can only take so much funny. See ya!';// output response
