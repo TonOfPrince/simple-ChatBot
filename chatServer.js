@@ -30,7 +30,7 @@ io.on('connect', function(socket) {
   var questionNum = 0; // keep count of question, used for IF condition.
   socket.on('loaded', function(){// we wait until the client has loaded and contacted us that it is ready to go.
 
-  socket.emit('answer',"Hey, Hello I am \"___*-\" a simple joke chat bot example."); //We start with the introduction;
+  socket.emit('answer',"Hey, Hello I am FunnyBot a simple joke chat bot example."); //We start with the introduction;
   setTimeout(timedQuestion, 2500, socket, "What is your Name?"); // Wait a moment and respond with a question.
 
 });
@@ -50,93 +50,56 @@ function bot(data,socket,questionNum) {
   var waitTime;
 
 /// These are the main statments that make up the conversation.
-  if (questionNum == 0) {
+  if (questionNum === 0) {
     answer = `Hello ${input} :-)`;// output response
     waitTime = 2000;
-    question = 'What type of joke do you want to hear?';			    	// load next question
-  } else if (questionNum == 1) {
-    if (input.toLowerCase() === 'dirty') {
-      answer = `A horse walks out a bar and slips into some mud. Get it?`;// output response
-      waitTime = 5000;
-      question = 'Want to hear another joke?';			    	// load next question
-    } else if (input.toLowerCase() === 'clean') {
-      answer = `A horse walks out a bar and slips on a bar of soap. Get it?`;// output response
-      waitTime = 5000;
-      question = 'Want to hear another joke?';
-    } else if (input.toLowerCase() === 'funny') {
-      answer = `A horse walks out a bar, slips and hits his funny bone. Get it?`;// output response
-      waitTime = 5000;
-      question = 'Want to hear another joke?';
-    } else if (input.toLowerCase() === 'dark') {
-      answer = `A horse walks out a bar at night and slips. Get it?`;// output response
-      waitTime = 5000;
-      question = 'Want to hear another joke?';
-    } else if (input.toLowerCase() === 'pun') {
-      answer = `Two colts were playing games and I said, "Quit horsin' around!". Get it?`;// output response
-      waitTime = 5000;
-      question = 'Want to hear another joke?';
+    question = 'Do you want to hear a joke?';	// load next question
+  } else if (questionNum === 1) {
+    if (input.toLowerCase() === 'yes') {
+      answer = `Great! One joke coming right up!`;// output response
+      question = 'Knock Knock!'; // load next question
+    } else if (input.toLowerCase() === 'no') {
+      answer = `Too bad! I'm a joke bot and I my only purpose is to tell jokes!`;// output response
+      question = 'Knock Knock!'; // load next question
     } else {
-      answer = `A horse walks into a bar and the bartender says why the long face. Get it?`;// output response
-      waitTime = 5000;
-      question = 'Want to hear another joke?';
+      answer = `I don't understand, so a joke it is!`;// output response
+      question = 'Knock Knock!'; // load next question
     }
-  } else if (questionNum == 2) {
-    if (input.toLowerCase() === 'yes'|| input === 1){
-      answer = 'Perfect!';
-      // waitTime = 2000;
-      // question = 'Whats your favorite place?';
-      questionNum = 0;
+    waitTime = 2000;
+  } else if (questionNum === 2) {
+    if (input.toLowerCase() === `who's there?` || input.toLowerCase() === `whos there?` || input.toLowerCase() === `who's there` || input.toLowerCase() === `whos there`) {
+      answer = '';// output response
       waitTime = 0;
-    } else if(input.toLowerCase() === 'no'|| input === 0){
-      answer = 'People can only take so much funny. See ya!';// output response
-      waitTime = 0;
-      question = '';
+      question = 'Nana';			    	// load next question
     } else {
-      answer = 'People can only take so much funny. See ya!';// output response
-      waitTime = 0;
-      question = '';
+      answer = `Is this your first knock knock joke? Ask me 'who's there?'!`;// output response
+      question = 'Knock Knock!'; // load next question
+      waitTime = 5000;
+      questionNum--;
     }
-  } else {
-    answer = 'People can only take so much funny. See ya!';// output response
-    waitTime = 0;
-    question = '';
+  } else if (questionNum === 3) {
+    if (input.toLowerCase() === 'nana who?' || input.toLowerCase() === 'nana who'){
+      answer = 'Nana your business! Hahahahahahahhaahaha';
+      question = '';
+      waitTime = 5000;
+    } else {
+      answer = `Is this your first knock knock joke? Ask me 'nana who?'!`;// output response
+      question = 'Nana'; // load next question
+      waitTime = 5000;
+      questionNum--;
+    }
   }
-  // else if (questionNum == 3) {
-  //   answer= 'Ok, ' + input+' it is.';
-  //   socket.emit('changeBG',input.toLowerCase());
-  //   waitTime = 2000;
-  //   question = 'Can you still read the font?';			    	// load next question
-  // } else if (questionNum == 4) {
-  //   if (input.toLowerCase() === 'yes'|| input === 1){
-  //     answer = 'Perfect!';
-  //     waitTime = 2000;
-  //     question = 'Whats your favorite place?';
-  //   } else if(input.toLowerCase() === 'no'|| input === 0){
-  //       socket.emit('changeFont','white'); /// we really should look up the inverse of what we said befor.
-  //       question = 'How about now?'
-  //       answer = '';
-  //       waitTime = 0;
-  //       questionNum--; // Here we go back in the question number this can end up in a loop
-  //   } else {
-  //     answer = 'I did not understand you. Can you please answer with simply with yes or no.'
-  //     question = '';
-  //     questionNum--;
-  //     waitTime = 0;
-  //   }
-  // load next question
-  // }
-  
 
 
 // We take the changed data and distribute it across the required objects.
   socket.emit('answer', answer);
-  setTimeout(timedQuestion, waitTime,socket,question);
+  setTimeout(timedQuestion, waitTime, socket, question);
   return questionNum+1;
 }
 
-function timedQuestion(socket,question) {
-  if (question!='') {
-    socket.emit('question',question);
+function timedQuestion(socket, question) {
+  if (question != '') {
+    socket.emit('question', question);
   } else {
     //console.log('No Question send!');
   }
