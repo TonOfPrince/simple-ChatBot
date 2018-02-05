@@ -30,8 +30,8 @@ socket.on('answer', function(msg) {
 });
 socket.on('question', function(msg) {
   console.log('Incomming Question:', msg);
-  questionRecieved=true;
-  document.getElementById("input").style.display="block";
+  questionRecieved = true;
+  document.getElementById("input").style.display = "block";
   changeText(msg);
 });
 
