@@ -65,7 +65,7 @@ function bot(data,socket,questionNum) {
       answer = `I don't understand, so a joke it is!`;// output response
       question = 'Knock Knock!'; // load next question
     }
-    waitTime = 2000;
+    waitTime = 3500;
   } else if (questionNum === 2) {
     if (input.toLowerCase() === `who's there?` || input.toLowerCase() === `whos there?` || input.toLowerCase() === `who's there` || input.toLowerCase() === `whos there`) {
       answer = '';// output response
